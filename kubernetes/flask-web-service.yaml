@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2022-06-21T19:50:16Z"
+  labels:
+    app: flask-web
+  name: flask-web-service
+  namespace: flask
+  resourceVersion: "1087"
+  uid: 9b81495b-af87-4f8f-a9ce-9ec9e4549e69
+spec:
+  clusterIP: 10.43.46.69
+  clusterIPs:
+  - 10.43.46.69
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 80-5000
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: flask-web
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
