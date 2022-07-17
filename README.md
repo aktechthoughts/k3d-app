@@ -2,16 +2,28 @@
 ### This repository is exmaple for setting up local kubernetes using k3d
 
 
-#### Use below command to create k3d cluster, registry, namespace, build image, deployment, service and ingress.
+#### Use below command to create k3d cluster, registry without default loadbalance (traefik)
 
 ```
 k3d registry create k3d-registry --port 5050
+k3d cluster create ak-cluster -p "9900:80@loadbalancer" --registry-use k3d-k3d-registry:5050 --registry-config kubernetes/k3d-registries.yaml --k3s-arg "--no-deploy=traefik@server:*"
+```
 
-k3d cluster create k3d-cluster -p "9900:80@loadbalancer" --registry-use k3d-k3d-registry:5050 --registry-config kubernetes/registries.yaml
-./scripts/build.sh
+#### Create a loadbalance ingress-nginx
+
+```
+kubectl apply -f kubernetes/k3d-ingress-nginx.yaml
+```
+
+#### Create a namespace, build image, deployment, service and ingress.
+
+```
 kubectl create namespace flask
 kubectl config set-context --current --namespace=flask
+./scripts/build.sh
 ```
+
+
 
 
 #### Use Existing deployments.
