@@ -31,7 +31,7 @@ kubectl config set-context --current --namespace=flask
 ```
 kubectl apply -f kubernetes/flask-web.yaml
 kubectl apply -f kubernetes/flask-web-service.yaml
-kubectl apply -f ingress.yaml
+kubectl apply -f kubernetes/ingress.yaml
 ```
 
 #### Create and save new deployments
